@@ -8,10 +8,8 @@ class TimeStackWidget extends StatelessWidget {
   final int minutesIndexMid;
   final int hoursIndexBot;
   final int minutesIndexBot;
-  final String hoursTop;
-  final String minutesTop;
-  final String hoursMid;
-  final String minutesMid;
+  final int minutesCntr;
+  final int hoursCntr;
 
   const TimeStackWidget({
     required this.hoursIndexTop,
@@ -20,10 +18,8 @@ class TimeStackWidget extends StatelessWidget {
     required this.minutesIndexMid,
     required this.hoursIndexBot,
     required this.minutesIndexBot,
-    required this.hoursMid,
-    required this.hoursTop,
-    required this.minutesMid,
-    required this.minutesTop,
+    required this.minutesCntr,
+    required this.hoursCntr,
     super.key,
   });
 
@@ -37,21 +33,52 @@ class TimeStackWidget extends StatelessWidget {
           width: 200,
           color: const Color.fromARGB(255, 53, 28, 109),
         ),
-        TimeAnimatedPos(index: hoursIndexTop, left: 30, time: hoursTop),
-        TimeAnimatedPos(index: minutesIndexTop, left: 112, time: minutesTop),
-        TimeAnimatedPos(index: hoursIndexMid, left: 30, time: hoursMid),
-        TimeAnimatedPos(index: minutesIndexMid, left: 112, time: minutesMid),
+        Positioned(
+          top: -10,
+          left: 92.5,
+          child: Text(
+            DateTime.now().second % 2 == 0 ? "" : ":",
+            style: TextStyle(
+              fontSize: 52,
+              color: const Color.fromARGB(255, 231, 255, 252),
+            ),
+          ),
+        ),
+        TimeAnimatedPos(
+          index: hoursIndexTop,
+          left: 30,
+          isHours: true,
+          timeCntr: (hoursCntr - 1) % 3,
+        ),
+        TimeAnimatedPos(
+          index: minutesIndexTop,
+          left: 112,
+          isHours: false,
+          timeCntr: (minutesCntr - 1) % 3,
+        ),
+        TimeAnimatedPos(
+          index: hoursIndexMid,
+          left: 30,
+          isHours: true,
+          timeCntr: hoursCntr,
+        ),
+        TimeAnimatedPos(
+          index: minutesIndexMid,
+          left: 112,
+          isHours: false,
+          timeCntr: minutesCntr,
+        ),
         TimeAnimatedPos(
           index: hoursIndexBot,
           left: 30,
-          time: hoursMid,
+          isHours: true,
+          timeCntr: (hoursCntr + 1) % 3,
         ),
-        AnimatedPositioned(
+        TimeAnimatedPos(
+          index: minutesIndexBot,
           left: 112,
-          top: minutesPosBot,
-          duration: durBot,
-          curve: curveBot,
-          child: Text("23", style: TextStyle(fontSize: 52)),
+          isHours: false,
+          timeCntr: (minutesCntr + 1) % 3,
         ),
       ],
     );
@@ -61,12 +88,14 @@ class TimeStackWidget extends StatelessWidget {
 class TimeAnimatedPos extends StatelessWidget {
   final double left;
   final int index;
-  final String time;
+  final bool isHours;
+  final int timeCntr;
 
   const TimeAnimatedPos({
     required this.index,
     required this.left,
-    required this.time,
+    required this.isHours,
+    required this.timeCntr,
     super.key,
   });
 
@@ -77,7 +106,15 @@ class TimeAnimatedPos extends StatelessWidget {
       top: TimeCellData.timePos[index],
       duration: TimeCellData.timeDur[index],
       curve: TimeCellData.timeCurve[index],
-      child: Text(time, style: TextStyle(fontSize: 52)),
+      child: Text(
+        isHours
+            ? TimeCellData.hoursValue[timeCntr]
+            : TimeCellData.minutesValue[timeCntr],
+        style: TextStyle(
+          fontSize: 52,
+          color: const Color.fromARGB(255, 231, 255, 252),
+        ),
+      ),
     );
   }
 }
