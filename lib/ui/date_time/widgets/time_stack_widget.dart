@@ -26,19 +26,20 @@ class TimeStackWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double hoursPosLeft = 48;
-    const double minutesPosLeft = 158;
+    final styleMap = MainTheme.bungee;
+    double hoursPosLeft = styleMap["hoursPos"];
+    double minutesPosLeft = styleMap["minutesPos"];
 
     return Stack(
       alignment: AlignmentDirectional.centerStart,
       children: [
-        Container(height: 100, width: 300, color: MainTheme.dateTimePageColor),
+        Container(height: 100, width: 310, color: MainTheme.dateTimePageColor),
         Positioned(
           top: -10,
-          left: 135.5,
+          left: styleMap["colonPos"],
           child: Text(
             DateTime.now().second % 2 == 0 ? "" : ":",
-            style: MainTheme.timeTextStyle,
+            style: styleMap["textStyle"],
           ),
         ),
         TimeAnimatedPos(
@@ -46,36 +47,42 @@ class TimeStackWidget extends StatelessWidget {
           left: hoursPosLeft,
           isHours: true,
           timeCntr: (hoursCntr - 1) % 3,
+          textStyle: styleMap["textStyle"],
         ),
         TimeAnimatedPos(
           index: minutesIndexTop,
           left: minutesPosLeft,
           isHours: false,
           timeCntr: (minutesCntr - 1) % 3,
+          textStyle: styleMap["textStyle"],
         ),
         TimeAnimatedPos(
           index: hoursIndexMid,
           left: hoursPosLeft,
           isHours: true,
           timeCntr: hoursCntr,
+          textStyle: styleMap["textStyle"],
         ),
         TimeAnimatedPos(
           index: minutesIndexMid,
           left: minutesPosLeft,
           isHours: false,
           timeCntr: minutesCntr,
+          textStyle: styleMap["textStyle"],
         ),
         TimeAnimatedPos(
           index: hoursIndexBot,
           left: hoursPosLeft,
           isHours: true,
           timeCntr: (hoursCntr + 1) % 3,
+          textStyle: styleMap["textStyle"],
         ),
         TimeAnimatedPos(
           index: minutesIndexBot,
           left: minutesPosLeft,
           isHours: false,
           timeCntr: (minutesCntr + 1) % 3,
+          textStyle: styleMap["textStyle"],
         ),
       ],
     );
@@ -87,12 +94,14 @@ class TimeAnimatedPos extends StatelessWidget {
   final int index;
   final bool isHours;
   final int timeCntr;
+  final TextStyle textStyle;
 
   const TimeAnimatedPos({
     required this.index,
     required this.left,
     required this.isHours,
     required this.timeCntr,
+    required this.textStyle,
     super.key,
   });
 
@@ -107,7 +116,7 @@ class TimeAnimatedPos extends StatelessWidget {
         isHours
             ? TimeCellData.hoursValue[timeCntr]
             : TimeCellData.minutesValue[timeCntr],
-        style: MainTheme.timeTextStyle,
+        style: textStyle,
       ),
     );
   }

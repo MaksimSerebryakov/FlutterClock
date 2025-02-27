@@ -121,6 +121,7 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
             date,
             style: TextStyle(
               fontSize: 35,
+              fontFamily: "BungeeShade",
               color: const Color.fromARGB(255, 43, 45, 157),
             ),
           ),
