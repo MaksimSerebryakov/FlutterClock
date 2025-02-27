@@ -3,22 +3,14 @@ import 'package:five_minutes_ready/ui/date_time/theme/main_theme.dart';
 import 'package:flutter/material.dart';
 
 class TimeStackWidget extends StatelessWidget {
-  final int hoursIndexTop;
-  final int minutesIndexTop;
   final int hoursIndexMid;
   final int minutesIndexMid;
-  final int hoursIndexBot;
-  final int minutesIndexBot;
   final int minutesCntr;
   final int hoursCntr;
 
   const TimeStackWidget({
-    required this.hoursIndexTop,
-    required this.minutesIndexTop,
     required this.hoursIndexMid,
     required this.minutesIndexMid,
-    required this.hoursIndexBot,
-    required this.minutesIndexBot,
     required this.minutesCntr,
     required this.hoursCntr,
     super.key,
@@ -26,14 +18,14 @@ class TimeStackWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styleMap = MainTheme.rubikVinyl;
+    final styleMap = MainTheme.bungee;
     double hoursPosLeft = styleMap["hoursPos"];
     double minutesPosLeft = styleMap["minutesPos"];
 
     return Stack(
       alignment: AlignmentDirectional.centerStart,
       children: [
-        Container(height: 100, width: 310, color: MainTheme.dateTimePageColor),
+        Container(height: 100, width: 320, color: MainTheme.dateTimePageColor),
         Positioned(
           top: -10,
           left: styleMap["colonPos"],
@@ -43,14 +35,14 @@ class TimeStackWidget extends StatelessWidget {
           ),
         ),
         TimeAnimatedPos(
-          index: hoursIndexTop,
+          index: (hoursIndexMid - 1) % 3,
           left: hoursPosLeft,
           isHours: true,
           timeCntr: (hoursCntr - 1) % 3,
           textStyle: styleMap["textStyle"],
         ),
         TimeAnimatedPos(
-          index: minutesIndexTop,
+          index: (minutesIndexMid - 1) % 3,
           left: minutesPosLeft,
           isHours: false,
           timeCntr: (minutesCntr - 1) % 3,
@@ -71,14 +63,14 @@ class TimeStackWidget extends StatelessWidget {
           textStyle: styleMap["textStyle"],
         ),
         TimeAnimatedPos(
-          index: hoursIndexBot,
+          index: (hoursIndexMid + 1) % 3,
           left: hoursPosLeft,
           isHours: true,
           timeCntr: (hoursCntr + 1) % 3,
           textStyle: styleMap["textStyle"],
         ),
         TimeAnimatedPos(
-          index: minutesIndexBot,
+          index: (minutesIndexMid + 1) % 3,
           left: minutesPosLeft,
           isHours: false,
           timeCntr: (minutesCntr + 1) % 3,
@@ -108,6 +100,7 @@ class TimeAnimatedPos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedPositioned(
+      // TODO: sheet code
       left: left,
       top: TimeCellData.timePos[index],
       duration: TimeCellData.timeDur[index],

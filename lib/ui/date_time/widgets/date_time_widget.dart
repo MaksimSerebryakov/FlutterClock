@@ -107,12 +107,8 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TimeStackWidget(
-            hoursIndexTop: (hoursCntrPos - 1) % 3,
-            minutesIndexTop: (minutesCntrPos - 1) % 3,
             hoursIndexMid: hoursCntrPos % 3,
             minutesIndexMid: minutesCntrPos % 3,
-            hoursIndexBot: (hoursCntrPos + 1) % 3,
-            minutesIndexBot: (minutesCntrPos + 1) % 3,
             hoursCntr: hoursCntr % 3,
             minutesCntr: minutesCntr % 3,
           ),
