@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:five_minutes_ready/providers/settings_provider.dart';
 import 'package:five_minutes_ready/ui/date_time/entities/time_cell_data.dart';
 import 'package:five_minutes_ready/ui/date_time/widgets/time_stack_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class DateTimeWidget extends StatefulWidget {
   const DateTimeWidget({super.key});
@@ -101,6 +103,8 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final textColor = Provider.of<SettingsProvider>(context, listen: false).textColor;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -118,7 +122,7 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
             style: TextStyle(
               fontSize: 35,
               fontFamily: "BungeeShade",
-              color: const Color.fromARGB(255, 43, 45, 157),
+              color: textColor,
             ),
           ),
         ],
