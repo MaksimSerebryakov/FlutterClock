@@ -42,5 +42,15 @@ abstract class MainTheme {
     "minutesPos": 164.0,
     "colonPos": 129.5
   };
+  static const Map<String, dynamic> rubikVinyl = {
+    "textStyle": TextStyle(
+      fontSize: 85,
+      fontFamily: "RubikVinyl",
+      color: MainTheme.timeColor,
+    ),
+    "hoursPos": 13.0,
+    "minutesPos": 170.0,
+    "colonPos": 129.5
+  };
   static const timeColor = Color.fromARGB(255, 31, 46, 133);
 }

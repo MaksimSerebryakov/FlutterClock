@@ -26,7 +26,7 @@ class TimeStackWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styleMap = MainTheme.bungee;
+    final styleMap = MainTheme.rubikVinyl;
     double hoursPosLeft = styleMap["hoursPos"];
     double minutesPosLeft = styleMap["minutesPos"];
 

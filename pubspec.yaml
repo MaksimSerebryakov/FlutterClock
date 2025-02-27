@@ -99,5 +99,8 @@ flutter:
     - family: ZenDots
       fonts:
         - asset: assets/fonts/ZenDots-Regular.ttf
+    - family: RubikVinyl
+      fonts:
+        - asset: assets/fonts/RubikVinyl-Regular.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
