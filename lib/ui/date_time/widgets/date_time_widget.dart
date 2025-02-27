@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:five_minutes_ready/ui/date_time/entities/time_cell_data.dart';
 import 'package:five_minutes_ready/ui/date_time/widgets/time_stack_widget.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,7 @@ class DateTimeWidget extends StatefulWidget {
 class _DateTimeWidgetState extends State<DateTimeWidget> {
   late Timer _timer;
 
-  String minutesNow = DateFormat("mm").format(DateTime.now());
-  String hoursNow = DateFormat("HH").format(DateTime.now());
+  String date = DateFormat('dd.MM.yyyy').format(DateTime.now());
 
   int hoursCntrPos = 1;
   int minutesCntrPos = 1;
@@ -104,6 +104,7 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TimeStackWidget(
             hoursIndexTop: (hoursCntrPos - 1) % 3,
@@ -114,6 +115,14 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
             minutesIndexBot: (minutesCntrPos + 1) % 3,
             hoursCntr: hoursCntr % 3,
             minutesCntr: minutesCntr % 3,
+          ),
+          SizedBox(height: 20),
+          Text(
+            date,
+            style: TextStyle(
+              fontSize: 35,
+              color: const Color.fromARGB(255, 43, 45, 157),
+            ),
           ),
         ],
       ),

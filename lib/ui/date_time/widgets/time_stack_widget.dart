@@ -1,4 +1,5 @@
 import 'package:five_minutes_ready/ui/date_time/entities/time_cell_data.dart';
+import 'package:five_minutes_ready/ui/date_time/theme/main_theme.dart';
 import 'package:flutter/material.dart';
 
 class TimeStackWidget extends StatelessWidget {
@@ -25,58 +26,54 @@ class TimeStackWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double hoursPosLeft = 48;
+    const double minutesPosLeft = 158;
+
     return Stack(
       alignment: AlignmentDirectional.centerStart,
       children: [
-        Container(
-          height: 60,
-          width: 200,
-          color: const Color.fromARGB(255, 53, 28, 109),
-        ),
+        Container(height: 100, width: 300, color: MainTheme.dateTimePageColor),
         Positioned(
           top: -10,
-          left: 92.5,
+          left: 135.5,
           child: Text(
             DateTime.now().second % 2 == 0 ? "" : ":",
-            style: TextStyle(
-              fontSize: 52,
-              color: const Color.fromARGB(255, 231, 255, 252),
-            ),
+            style: MainTheme.timeTextStyle,
           ),
         ),
         TimeAnimatedPos(
           index: hoursIndexTop,
-          left: 30,
+          left: hoursPosLeft,
           isHours: true,
           timeCntr: (hoursCntr - 1) % 3,
         ),
         TimeAnimatedPos(
           index: minutesIndexTop,
-          left: 112,
+          left: minutesPosLeft,
           isHours: false,
           timeCntr: (minutesCntr - 1) % 3,
         ),
         TimeAnimatedPos(
           index: hoursIndexMid,
-          left: 30,
+          left: hoursPosLeft,
           isHours: true,
           timeCntr: hoursCntr,
         ),
         TimeAnimatedPos(
           index: minutesIndexMid,
-          left: 112,
+          left: minutesPosLeft,
           isHours: false,
           timeCntr: minutesCntr,
         ),
         TimeAnimatedPos(
           index: hoursIndexBot,
-          left: 30,
+          left: hoursPosLeft,
           isHours: true,
           timeCntr: (hoursCntr + 1) % 3,
         ),
         TimeAnimatedPos(
           index: minutesIndexBot,
-          left: 112,
+          left: minutesPosLeft,
           isHours: false,
           timeCntr: (minutesCntr + 1) % 3,
         ),
@@ -110,10 +107,7 @@ class TimeAnimatedPos extends StatelessWidget {
         isHours
             ? TimeCellData.hoursValue[timeCntr]
             : TimeCellData.minutesValue[timeCntr],
-        style: TextStyle(
-          fontSize: 52,
-          color: const Color.fromARGB(255, 231, 255, 252),
-        ),
+        style: MainTheme.timeTextStyle,
       ),
     );
   }
