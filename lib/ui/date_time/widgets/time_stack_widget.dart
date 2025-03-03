@@ -1,6 +1,5 @@
 import 'package:five_minutes_ready/providers/settings_provider.dart';
 import 'package:five_minutes_ready/ui/date_time/entities/time_cell_data.dart';
-import 'package:five_minutes_ready/ui/date_time/theme/main_theme.dart';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,12 +20,13 @@ class TimeStackWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final styleMap = MainTheme.bungee;
+    final styleMap =
+        Provider.of<SettingsProvider>(context, listen: true).bungee;
     double hoursPosLeft = styleMap["hoursPos"];
     double minutesPosLeft = styleMap["minutesPos"];
 
     final backgroundColor =
-        Provider.of<SettingsProvider>(context, listen: false).backgroundColor;
+        Provider.of<SettingsProvider>(context, listen: false).colors["backgroundColor"];
 
     return Stack(
       alignment: AlignmentDirectional.centerStart,

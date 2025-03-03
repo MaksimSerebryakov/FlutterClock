@@ -10,9 +10,15 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final backgroundColor =
-        Provider.of<SettingsProvider>(context, listen: false).backgroundColor;
+        Provider.of<SettingsProvider>(
+          context,
+          listen: false,
+        ).colors["backgroundColor"];
     final textColor =
-        Provider.of<SettingsProvider>(context, listen: false).textColor;
+        Provider.of<SettingsProvider>(
+          context,
+          listen: false,
+        ).colors["textColor"];
 
     return Scaffold(
       appBar: AppBar(

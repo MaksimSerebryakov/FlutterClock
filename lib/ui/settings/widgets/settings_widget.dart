@@ -1,6 +1,8 @@
 import 'package:five_minutes_ready/providers/settings_provider.dart';
-import 'package:five_minutes_ready/ui/date_time/theme/main_theme.dart';
+import 'package:five_minutes_ready/ui/settings/widgets/add_alarm_widget.dart';
+import 'package:five_minutes_ready/ui/settings/widgets/alarms_list_widget.dart';
 import 'package:five_minutes_ready/ui/settings/widgets/color_picker_widget.dart';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,42 +11,51 @@ class SettingsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor =
-        Provider.of<SettingsProvider>(context, listen: false).textColor;
     final backgroundColor =
-        Provider.of<SettingsProvider>(context, listen: false).backgroundColor;
+        Provider.of<SettingsProvider>(
+          context,
+          listen: false,
+        ).colors["backgroundColor"];
 
     return Container(
       width: double.infinity,
-      color: MainTheme.dateTimePageColor,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
+      color: backgroundColor,
+      padding: EdgeInsets.fromLTRB(0, 10, 30, 10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Row(
-            children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(30, 10, 10, 10),
-                child: ColorPickerWidget(),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ButtonStyle(
-                  side: WidgetStatePropertyAll(
-                    BorderSide(width: 3, color: textColor),
-                  ),
-                  backgroundColor: WidgetStatePropertyAll(backgroundColor),
-                  elevation: WidgetStatePropertyAll(1.0),
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(3)),
-                    ),
+          Expanded(
+            flex: 6,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  padding: EdgeInsets.fromLTRB(30, 10, 10, 10),
+                  child: ColorPickerWidget(
+                    settingText: "цвет текста",
+                    colorToSet: "textColor",
+                    buttonColor: "backgroundColor",
+                    buttonTextColor: "textColor",
                   ),
                 ),
-                child: Text("цвет текста", style: TextStyle(color: textColor)),
-              ),
-            ],
+                Container(
+                  padding: EdgeInsets.fromLTRB(30, 10, 10, 10),
+                  child: ColorPickerWidget(
+                    settingText: "цвет фона",
+                    colorToSet: "backgroundColor",
+                    buttonColor: "backgroundColor",
+                    buttonTextColor: "textColor",
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(70, 10, 10, 10),
+                  child: AddAlarmWidget(),
+                ),
+              ],
+            ),
           ),
+          Expanded(flex: 1, child: AlarmsListWidget()),
         ],
       ),
     );

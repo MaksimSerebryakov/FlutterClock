@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:five_minutes_ready/providers/settings_provider.dart';
 import 'package:five_minutes_ready/ui/date_time/entities/time_cell_data.dart';
 import 'package:five_minutes_ready/ui/date_time/widgets/time_stack_widget.dart';
@@ -69,7 +70,27 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
 
       needChangeMinutes = true;
     }
+
+    alarmOnTime();
+
     setState(() {});
+  }
+
+  void alarmOnTime() async {
+    final now = DateTime.now();
+    final alarms = Provider.of<SettingsProvider>(context, listen: false).alarms;
+
+    for (int i = 0; i < alarms.length; i++) {
+      if (alarms[i].itsAlarmTime(now) == true) {
+        await playAudio(alarms[i].readiness);
+      }
+    }
+  }
+
+  Future<void> playAudio(String sourceFile) async {
+    final player = AudioPlayer();
+
+    await player.play(AssetSource("audio/$sourceFile.mp3"));
   }
 
   @override
@@ -103,7 +124,11 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = Provider.of<SettingsProvider>(context, listen: false).textColor;
+    final textColor =
+        Provider.of<SettingsProvider>(
+          context,
+          listen: false,
+        ).colors["textColor"];
 
     return Center(
       child: Column(
