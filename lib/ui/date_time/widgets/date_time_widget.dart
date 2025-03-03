@@ -1,8 +1,12 @@
 import 'dart:async';
+
+import 'package:audioplayers/audioplayers.dart';
+import 'package:five_minutes_ready/providers/settings_provider.dart';
 import 'package:five_minutes_ready/ui/date_time/entities/time_cell_data.dart';
 import 'package:five_minutes_ready/ui/date_time/widgets/time_stack_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class DateTimeWidget extends StatefulWidget {
   const DateTimeWidget({super.key});
@@ -14,8 +18,7 @@ class DateTimeWidget extends StatefulWidget {
 class _DateTimeWidgetState extends State<DateTimeWidget> {
   late Timer _timer;
 
-  String minutesNow = DateFormat("mm").format(DateTime.now());
-  String hoursNow = DateFormat("HH").format(DateTime.now());
+  String date = DateFormat('dd.MM.yyyy').format(DateTime.now());
 
   int hoursCntrPos = 1;
   int minutesCntrPos = 1;
@@ -67,7 +70,27 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
 
       needChangeMinutes = true;
     }
+
+    alarmOnTime();
+
     setState(() {});
+  }
+
+  void alarmOnTime() async {
+    final now = DateTime.now();
+    final alarms = Provider.of<SettingsProvider>(context, listen: false).alarms;
+
+    for (int i = 0; i < alarms.length; i++) {
+      if (alarms[i].itsAlarmTime(now) == true) {
+        await playAudio(alarms[i].readiness);
+      }
+    }
+  }
+
+  Future<void> playAudio(String sourceFile) async {
+    final player = AudioPlayer();
+
+    await player.play(AssetSource("audio/$sourceFile.mp3"));
   }
 
   @override
@@ -101,19 +124,31 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final textColor =
+        Provider.of<SettingsProvider>(
+          context,
+          listen: false,
+        ).colors["textColor"];
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TimeStackWidget(
-            hoursIndexTop: (hoursCntrPos - 1) % 3,
-            minutesIndexTop: (minutesCntrPos - 1) % 3,
             hoursIndexMid: hoursCntrPos % 3,
             minutesIndexMid: minutesCntrPos % 3,
-            hoursIndexBot: (hoursCntrPos + 1) % 3,
-            minutesIndexBot: (minutesCntrPos + 1) % 3,
             hoursCntr: hoursCntr % 3,
             minutesCntr: minutesCntr % 3,
+          ),
+          SizedBox(height: 20),
+          Text(
+            date,
+            style: TextStyle(
+              fontSize: 35,
+              fontFamily: "BungeeShade",
+              color: textColor,
+            ),
           ),
         ],
       ),
