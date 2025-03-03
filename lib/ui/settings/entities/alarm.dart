@@ -33,6 +33,20 @@ class Alarm {
     return false;
   }
 
+  static Alarm fromJson(Map<String, dynamic> json) => Alarm(
+    id: json["id"] as int,
+    hour: json["hour"] as int,
+    minute: json["minute"] as int,
+    readiness: json["readiness"] as String,
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "hour": hour,
+    "minute": minute,
+    "readiness": readiness,
+  };
+
   @override
   bool operator ==(dynamic other) => other.id == id;
 }
