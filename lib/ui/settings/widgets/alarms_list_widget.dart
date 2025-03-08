@@ -14,6 +14,7 @@ class _AlarmsListWidgetState extends State<AlarmsListWidget> {
   @override
   Widget build(BuildContext context) {
     final alarms = Provider.of<SettingsProvider>(context, listen: true).alarms;
+
     final colorMap =
         Provider.of<SettingsProvider>(context, listen: true).colors;
 
@@ -37,14 +38,18 @@ class _AlarmsListWidgetState extends State<AlarmsListWidget> {
             Expanded(
               flex: 1,
               child: GestureDetector(
-                onTap: () {
-                  Provider.of<SettingsProvider>(
+                onTap: () async {
+                  await Provider.of<SettingsProvider>(
                     context,
                     listen: false,
                   ).removeAlarm(alarm);
                   setState(() {});
                 },
-                child: Icon(Icons.clear, color: colorMap["textColor"], size: 30,),
+                child: Icon(
+                  Icons.clear,
+                  color: colorMap["textColor"],
+                  size: 30,
+                ),
               ),
             ),
           ],

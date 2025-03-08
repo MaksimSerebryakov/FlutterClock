@@ -31,9 +31,9 @@ class TimeStackWidget extends StatelessWidget {
     return Stack(
       alignment: AlignmentDirectional.centerStart,
       children: [
-        Container(height: 100, width: 320, color: backgroundColor),
+        Container(height: 160, width: 525, color: backgroundColor),
         Positioned(
-          top: -10,
+          top: -20,
           left: styleMap["colonPos"],
           child: Text(
             DateTime.now().second % 2 == 0 ? "" : ":",

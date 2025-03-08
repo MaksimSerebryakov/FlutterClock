@@ -145,7 +145,7 @@ class _DateTimeWidgetState extends State<DateTimeWidget> {
           Text(
             date,
             style: TextStyle(
-              fontSize: 35,
+              fontSize: 45,
               fontFamily: "BungeeShade",
               color: textColor,
             ),

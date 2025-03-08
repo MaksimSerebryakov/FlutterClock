@@ -94,7 +94,7 @@ class _AddAlarmWidgetState extends State<AddAlarmWidget> {
 
     if (time != null) {
       if (context.mounted) {
-        Provider.of<SettingsProvider>(
+        await Provider.of<SettingsProvider>(
           context,
           listen: false,
         ).addNewAlarm(time.hour, time.minute, tenMinutesReady ? "10" : "5");
