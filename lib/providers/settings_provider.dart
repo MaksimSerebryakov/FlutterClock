@@ -11,13 +11,13 @@ class SettingsProvider extends ChangeNotifier {
 
   Map<String, dynamic> bungee = {
     "textStyle": TextStyle(
-      fontSize: 80,
+      fontSize: 140,
       fontFamily: "BungeeShade",
       color: MainTheme.timeColor,
     ),
-    "hoursPos": 13.0,
-    "minutesPos": 175.0,
-    "colonPos": 135.5,
+    "hoursPos": 0.0,
+    "minutesPos": 300.0,
+    "colonPos": 225.5,
   };
 
   List alarms = <Alarm>[];

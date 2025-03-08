@@ -18,7 +18,7 @@ class AppFileStorage {
     }
 
     _file = _initFile(
-      "/Users/maksim/Programming/flutter/five_minutes_ready/alarms.json",
+      "~/data/alarms.json",
     );
 
     return _file!;

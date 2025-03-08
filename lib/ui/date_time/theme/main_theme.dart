@@ -4,11 +4,11 @@ abstract class MainTheme {
   static const dateTimePageColor = Color.fromARGB(255, 254, 247, 229);
   static Map<String, dynamic> bungee = {
     "textStyle": TextStyle(
-      fontSize: 80,
+      fontSize: 30,
       fontFamily: "BungeeShade",
-      color: MainTheme.timeColor,
+      color: Colors.white,
     ),
-    "hoursPos": 13.0,
+    "hoursPos": 40.0,
     "minutesPos": 175.0,
     "colonPos": 135.5,
   };

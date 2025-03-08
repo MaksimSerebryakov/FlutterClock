@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TimeCellData {
-  static List<double> timePos = [-100, -5, 300];
+  static List<double> timePos = [-200, -15, 200];
   static List<Duration> timeDur = [
     Duration(milliseconds: 0),
-    Duration(milliseconds: 1200),
-    Duration(milliseconds: 1200),
+    Duration(milliseconds: 1000),
+    Duration(milliseconds: 1000),
   ];
   static List<Cubic> timeCurve = [
     Curves.easeInCubic,
