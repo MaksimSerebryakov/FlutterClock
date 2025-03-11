@@ -18,7 +18,7 @@ class SettingsProvider extends ChangeNotifier {
       color: MainTheme.timeColor,
     ),
     "hoursPos": 0.0,
-    "minutesPos": 300.0,
+    "minutesPos": 290.0,
     "colonPos": 225.5,
   };
 
