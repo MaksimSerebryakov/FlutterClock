@@ -18,7 +18,7 @@ class AppFileStorage {
     }
 
     _file = _initFile(
-      "~/data/alarms.json",
+      "alarms.json",
     );
 
     return _file!;
