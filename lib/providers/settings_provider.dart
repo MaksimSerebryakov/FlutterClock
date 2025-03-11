@@ -9,9 +9,11 @@ class SettingsProvider extends ChangeNotifier {
     "backgroundColor": MainTheme.dateTimePageColor,
   };
 
+  static const double fontSize = 140;
+
   Map<String, dynamic> bungee = {
     "textStyle": TextStyle(
-      fontSize: 140,
+      fontSize: fontSize,
       fontFamily: "BungeeShade",
       color: MainTheme.timeColor,
     ),
@@ -28,7 +30,7 @@ class SettingsProvider extends ChangeNotifier {
     colors[colorField] = color;
     if (colorField == "textColor") {
       bungee["textStyle"] = TextStyle(
-        fontSize: 80,
+        fontSize: fontSize,
         fontFamily: "BungeeShade",
         color: color,
       );
